@@ -20,20 +20,21 @@ decimal totalCost = cost + packagingCost + totalEnergyCost;
 Console.Clear();
 Console.WriteLine("\nFor your selection:");
 Console.WriteLine($"\nFreeze dry the {selectedItem} for {time} hours");
-//Console.WriteLine($"\nMenu selection: {selectedItem}");
-//Console.WriteLine($"Item Cost: ${cost:F2}");
-//Console.WriteLine($"Packaging: {packagingType} ${packagingCost}");
-//Console.WriteLine($"Energy Cost: ${totalEnergyCost:F2}");
 Console.WriteLine($"Total Cost: ${totalCost:F2}");
 
+//decimal profit = myProfit(sellingCost, totalCost);
+decimal sellingCost = CalculateSellingCost(totalCost);
+Console.WriteLine($"Selling Cost (20% profit): ${sellingCost:F2}");
 
+decimal profit = myProfit(sellingCost, totalCost);
+Console.WriteLine($"Profit: ${profit:F2}");
 
 Console.Write("\nSave order? Y/N: ");
 string saveChoice = Console.ReadLine()?.ToLower();
 
 if (saveChoice == "y")
 {
-    SaveOrder(selectedItem, packagingType, packagingCost, totalEnergyCost, totalCost);
+    SaveOrder(selectedItem, packagingType, packagingCost, totalEnergyCost, totalCost, sellingCost, profit);
 }
 else
 {
@@ -92,9 +93,9 @@ static decimal electricityCost(decimal FreezeDryerKiloWattHourCost, int hours)
     return FreezeDryerKiloWattHourCost * hours;
 }
 
-static void SaveOrder(string item, string packaging, decimal packagingCost, decimal energyCost, decimal totalCost)
+static void SaveOrder(string item, string packaging, decimal packagingCost, decimal energyCost, decimal totalCost, decimal sellingCost, decimal profit)
 {
-    string order = $"{item}, {packaging}, Packaging Cost: ${packagingCost:F2}, Energy Cost: ${energyCost:F2}, Total Cost: ${totalCost:F2}";
+    string order = $"{item}, {packaging}, Packaging Cost: ${packagingCost:F2}, Energy Cost: ${energyCost:F2}, Total Cost: ${totalCost:F2}, Selling Cost: ${sellingCost:F2}, Profit: {profit:F2}";
     string purchaseHistory = "purchasehistory.txt";
 
     List<string> orders = new();
@@ -111,6 +112,11 @@ static void SaveOrder(string item, string packaging, decimal packagingCost, deci
 static decimal CalculateSellingCost(decimal totalCost)
 {
     return totalCost * 1.20m;
+}
+
+static decimal myProfit(decimal sellingCost, decimal totalCost)
+{
+    return sellingCost - totalCost;
 }
 
 
