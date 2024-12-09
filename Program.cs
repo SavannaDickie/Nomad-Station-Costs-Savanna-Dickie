@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Diagnostics;
+using System.Net;
 using Microsoft.Win32.SafeHandles;
 
 const decimal KwhHourCost = 0.11m;
@@ -58,11 +60,15 @@ static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
     if (choice < 1 || choice > menuCostTime.Length)
     {
         Console.WriteLine("Invalid selection.");
+        //break;
+        
     }
+
+    Debug.Assert(choice >= 1 && choice <= menuCostTime.Length, "invaid selection");
 
     string[] selectedItemParts = menuCostTime[choice - 1].Split(',');
     string itemName = selectedItemParts[0].Trim();
-    int time = int.Parse(selectedItemParts[2].Replace("m","").Trim());
+    int time = int.Parse(selectedItemParts[2].Trim());
     decimal cost = decimal.Parse(selectedItemParts[1].Trim());
 
     return (itemName, cost, time);
@@ -90,7 +96,9 @@ static (string,decimal) Packaging()
 static decimal electricityCost(decimal FreezeDryerKiloWattHourCost, int hours)
 {
     //return FreezeDryerKiloWattHourCost * hours;
-    return FreezeDryerKiloWattHourCost * hours;
+    decimal energyCost = FreezeDryerKiloWattHourCost * hours;
+    Debug.Assert(energyCost >= 0, "Energy cost can not be nagative");
+    return energyCost;
 }
 
 static void SaveOrder(string item, string packaging, decimal packagingCost, decimal energyCost, decimal totalCost, decimal sellingCost, decimal profit)
@@ -106,12 +114,18 @@ static void SaveOrder(string item, string packaging, decimal packagingCost, deci
     orders.Add(order);
     
     File.WriteAllLines(purchaseHistory, orders);
+    string[] savedOrders = File.ReadAllLines(purchaseHistory);
     Console.WriteLine($"Order saved to {purchaseHistory}");
+
+    Debug.Assert(savedOrders.Contains(order), "ERROR: order not saved correctly");
 }
 
 static decimal CalculateSellingCost(decimal totalCost)
 {
-    return totalCost * 1.20m;
+    //adding 20% for revenue
+    decimal sellingCost = totalCost * 1.2m;
+    Debug.Assert(sellingCost>totalCost,"total cost less than selling cost");
+    return sellingCost;
 }
 
 static decimal myProfit(decimal sellingCost, decimal totalCost)
