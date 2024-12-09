@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nomad-Station-Costs-Savanna-Dickie")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5eb8f0ef1046a8420df95c63749014745500265b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b87cff26db2cd776121a2acad6a2466e84bcc192")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nomad-Station-Costs-Savanna-Dickie")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nomad-Station-Costs-Savanna-Dickie")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

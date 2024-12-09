@@ -1,0 +1,15 @@
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/bin/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/bin/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.deps.json
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/bin/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.runtimeconfig.json
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/bin/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.dll
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/bin/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.pdb
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.GeneratedMSBuildEditorConfig.editorconfig
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.AssemblyInfoInputs.cache
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.AssemblyInfo.cs
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.csproj.CoreCompileInputs.cache
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.sourcelink.json
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.dll
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/refint/Nomad-Station-Costs-Savanna-Dickie.dll
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.pdb
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/Nomad-Station-Costs-Savanna-Dickie.genruntimeconfig.cache
+/Users/personal3/Downloads/code/mycodedir/Nomad-Station-Costs-Savanna-Dickie/obj/Debug/net8.0/ref/Nomad-Station-Costs-Savanna-Dickie.dll

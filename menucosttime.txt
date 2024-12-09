@@ -1,5 +1,5 @@
-Apple Slices, 8m, 18
-Yo-Nanas, 10m, 23
-Strawberries, 9m, 15
-Smoothie Mix, 7, 25 
+Apple Slices, 5, 18
+Yo-Nanas, 6, 23
+Strawberries, 9, 15
+Smoothie Mix, 10, 25 
 Chicken Alfredo, 15, 26
