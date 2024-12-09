@@ -17,11 +17,29 @@ Console.WriteLine("This is a program that will calculate production costs for\nf
 decimal totalEnergyCost = electricityCost(FreezeDryerKiloWattHourCost, time);
 decimal totalCost = cost + packagingCost + totalEnergyCost;
 
-Console.WriteLine($"\nMenu selection: {selectedItem}");
-Console.WriteLine($"Item Cost: ${cost:F2}");
-Console.WriteLine($"Packaging: {packagingType} ${packagingCost}");
-Console.WriteLine($"Energy Cost: ${totalEnergyCost:F2}");
+Console.Clear();
+Console.WriteLine("\nFor your selection:");
+Console.WriteLine($"\nFreeze dry the {selectedItem} for {time} hours");
+//Console.WriteLine($"\nMenu selection: {selectedItem}");
+//Console.WriteLine($"Item Cost: ${cost:F2}");
+//Console.WriteLine($"Packaging: {packagingType} ${packagingCost}");
+//Console.WriteLine($"Energy Cost: ${totalEnergyCost:F2}");
 Console.WriteLine($"Total Cost: ${totalCost:F2}");
+
+
+
+Console.Write("\nSave order? Y/N: ");
+string saveChoice = Console.ReadLine()?.ToLower();
+
+if (saveChoice == "y")
+{
+    SaveOrder(selectedItem, packagingType, packagingCost, totalEnergyCost, totalCost);
+}
+else
+{
+    Console.WriteLine("This order will not be saved");
+}
+
 
 static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
 {
@@ -51,6 +69,7 @@ static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
 
 static (string,decimal) Packaging()
 {
+    Console.Clear();
     Console.WriteLine("Select Packaging");
     Console.WriteLine("1. Mylar Medium");
     Console.WriteLine("2. Mylar Large");
@@ -72,3 +91,26 @@ static decimal electricityCost(decimal FreezeDryerKiloWattHourCost, int hours)
     //return FreezeDryerKiloWattHourCost * hours;
     return FreezeDryerKiloWattHourCost * hours;
 }
+
+static void SaveOrder(string item, string packaging, decimal packagingCost, decimal energyCost, decimal totalCost)
+{
+    string order = $"{item}, {packaging}, Packaging Cost: ${packagingCost:F2}, Energy Cost: ${energyCost:F2}, Total Cost: ${totalCost:F2}";
+    string purchaseHistory = "purchasehistory.txt";
+
+    List<string> orders = new();
+    if(File.Exists(purchaseHistory))
+    {
+        orders.AddRange(File.ReadAllLines(purchaseHistory));
+    }
+    orders.Add(order);
+    
+    File.WriteAllLines(purchaseHistory, orders);
+    Console.WriteLine($"Order saved to {purchaseHistory}");
+}
+
+static decimal CalculateSellingCost(decimal totalCost)
+{
+    return totalCost * 1.20m;
+}
+
+
