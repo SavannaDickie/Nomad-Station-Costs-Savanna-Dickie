@@ -2,6 +2,7 @@
 
 using System.Diagnostics;
 using System.Net;
+using System.Runtime.CompilerServices;
 using Microsoft.Win32.SafeHandles;
 
 const decimal KwhHourCost = 0.11m;
@@ -46,6 +47,8 @@ else
 
 static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
 {
+    while(true)
+    {
     Console.WriteLine("\nMenu:");
     for (int i = 0; i < menuCostTime.Length; i++)
     {
@@ -55,23 +58,27 @@ static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
     }
     
     Console.Write("\nSelect an item by number: ");
-    int choice = int.Parse(Console.ReadLine() ?? "0");
-
-    if (choice < 1 || choice > menuCostTime.Length)
+    //int choice = int.Parse(Console.ReadLine() ?? "0");
+    if(int.TryParse(Console.ReadLine(),out int choice) && choice >= 1 && choice <= menuCostTime.Length)
     {
-        Console.WriteLine("Invalid selection.");
-        //break;
-        
-    }
-
-    Debug.Assert(choice >= 1 && choice <= menuCostTime.Length, "invaid selection");
 
     string[] selectedItemParts = menuCostTime[choice - 1].Split(',');
     string itemName = selectedItemParts[0].Trim();
     int time = int.Parse(selectedItemParts[2].Trim());
     decimal cost = decimal.Parse(selectedItemParts[1].Trim());
 
-    return (itemName, cost, time);
+     //if (choice < 1 || choice > menuCostTime.Length)
+    //{
+        //return(itemName, cost, time);
+       // Console.WriteLine("invalid Choice");
+       
+    //}
+    Debug.Assert(choice >= 1 && choice <= menuCostTime.Length, "ERROR WITH: invaid selection");
+    return(itemName,cost, time);
+    }
+    //Console.ReadKey();
+    Console.Clear();
+}
 }
 
 static (string,decimal) Packaging()
