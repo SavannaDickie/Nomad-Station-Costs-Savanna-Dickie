@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Collections;
 using System.Diagnostics;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -16,7 +17,7 @@ Console.WriteLine("This is a program that will calculate production costs for\nf
 
 (string selectedItem, decimal cost, int time) = SelectMenuItem(menuCostTime);
 (string packagingType, decimal packagingCost) = Packaging();
-//Packaging();
+
 decimal totalEnergyCost = electricityCost(FreezeDryerKiloWattHourCost, time);
 decimal totalCost = cost + packagingCost + totalEnergyCost;
 
@@ -25,23 +26,42 @@ Console.WriteLine("\nFor your selection:");
 Console.WriteLine($"\nFreeze dry the {selectedItem} for {time} hours");
 Console.WriteLine($"Total Cost: ${totalCost:F2}");
 
-//decimal profit = myProfit(sellingCost, totalCost);
 decimal sellingCost = CalculateSellingCost(totalCost);
 Console.WriteLine($"Selling Cost (20% profit): ${sellingCost:F2}");
 
 decimal profit = myProfit(sellingCost, totalCost);
 Console.WriteLine($"Profit: ${profit:F2}");
 
-Console.Write("\nSave order? Y/N: ");
-string saveChoice = Console.ReadLine()?.ToLower();
 
-if (saveChoice == "y")
+string saveChoice;
+while(true)
+
 {
-    SaveOrder(selectedItem, packagingType, packagingCost, totalEnergyCost, totalCost, sellingCost, profit);
-}
-else
-{
-    Console.WriteLine("This order will not be saved");
+    //Console.Clear();
+    Console.Write("\nSave order? Y/N:");
+    saveChoice = Console.ReadLine()?.ToLower();
+    if (saveChoice == "y")
+    {
+        SaveOrder(selectedItem, packagingType, packagingCost, totalEnergyCost, totalCost, sellingCost, profit);
+        break;
+    }
+    else if (saveChoice == "n")
+    {
+        Console.WriteLine("This order will not be saved");
+        break;
+    }
+    else
+    {
+        Console.Clear();
+        Console.WriteLine("\nFor your selection:");
+        Console.WriteLine($"\nFreeze dry the {selectedItem} for {time} hours");
+        Console.WriteLine($"Total Cost: ${totalCost:F2}");
+        Console.WriteLine($"Selling Cost (20% profit): ${sellingCost:F2}");
+        Console.WriteLine($"Profit: ${profit:F2}");
+        
+        continue;
+    }
+
 }
 
 
@@ -67,42 +87,40 @@ static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
     int time = int.Parse(selectedItemParts[2].Trim());
     decimal cost = decimal.Parse(selectedItemParts[1].Trim());
 
-     //if (choice < 1 || choice > menuCostTime.Length)
-    //{
-        //return(itemName, cost, time);
-       // Console.WriteLine("invalid Choice");
-       
-    //}
     Debug.Assert(choice >= 1 && choice <= menuCostTime.Length, "ERROR WITH: invaid selection");
     return(itemName,cost, time);
     }
-    //Console.ReadKey();
-    Console.Clear();
+  
 }
 }
 
 static (string,decimal) Packaging()
 {
+while(true)
+{
     Console.Clear();
     Console.WriteLine("Select Packaging");
     Console.WriteLine("1. Mylar Medium");
     Console.WriteLine("2. Mylar Large");
+    Console.WriteLine("3. No Packaging");
 
     Console.Write("select an item by number: ");
     string? choice = Console.ReadLine();
 
-    return choice switch
+    switch (choice)
     {
-        "1" => ("Mylar Medium",1.50m),
-        "2" => ("Mylar Large",2.15m),
-        _ => ("invalid", 0m)
+        case "1": return ("Mylar Medium",1.50m);
+        case "2": return ("Mylar Large",2.15m);
+        case "3": return ("No packaging", 0m);
+        default: break;
         
     };
+}
 }
 
 static decimal electricityCost(decimal FreezeDryerKiloWattHourCost, int hours)
 {
-    //return FreezeDryerKiloWattHourCost * hours;
+   
     decimal energyCost = FreezeDryerKiloWattHourCost * hours;
     Debug.Assert(energyCost >= 0, "Energy cost can not be nagative");
     return energyCost;
@@ -129,7 +147,7 @@ static void SaveOrder(string item, string packaging, decimal packagingCost, deci
 
 static decimal CalculateSellingCost(decimal totalCost)
 {
-    //adding 20% for revenue
+    
     decimal sellingCost = totalCost * 1.2m;
     Debug.Assert(sellingCost>totalCost,"total cost less than selling cost");
     return sellingCost;
