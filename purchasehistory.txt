@@ -16,3 +16,9 @@ Strawberries, Mylar Large, Packaging Cost: $2.15, Energy Cost: $2.00, Total Cost
 Yo-Nanas, Mylar Large, Packaging Cost: $2.15, Energy Cost: $3.06, Total Cost: $11.21, Selling Cost: $13.45, Profit: 2.24
 Yo-Nanas, Mylar Large, Packaging Cost: $2.15, Energy Cost: $3.06, Total Cost: $11.21, Selling Cost: $13.45, Profit: 2.24
 Yo-Nanas, Mylar Large, Packaging Cost: $2.15, Energy Cost: $3.06, Total Cost: $11.21, Selling Cost: $13.45, Profit: 2.24
+Yo-Nanas, Mylar Large, Packaging Cost: $2.15, Energy Cost: $3.06, Total Cost: $11.21, Selling Cost: $13.45, Profit: 2.24
+Strawberries, No packaging, Packaging Cost: $0.00, Energy Cost: $2.00, Total Cost: $11.00, Selling Cost: $13.20, Profit: 2.20
+Yo-Nanas, Mylar Medium, Packaging Cost: $1.50, Energy Cost: $3.06, Total Cost: $10.56, Selling Cost: $12.67, Profit: 2.11
+Yo-Nanas, Mylar Large, Packaging Cost: $2.15, Energy Cost: $3.06, Total Cost: $11.21, Selling Cost: $13.45, Profit: 2.24
+Apple Slices, Mylar Large, Packaging Cost: $2.15, Energy Cost: $2.40, Total Cost: $9.55, Selling Cost: $11.45, Profit: 1.91
+Chicken Alfredo, Mylar Large, Packaging Cost: $2.15, Energy Cost: $3.46, Total Cost: $20.61, Selling Cost: $24.73, Profit: 4.12

@@ -1,18 +1,23 @@
 ﻿// See https://aka.ms/new-console-template for more information
+//Savanna Dickie 10/13/2024 
+//FINAL program Nomad Station Cost Calculator 
 
 using System.Collections;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using Microsoft.Win32.SafeHandles;
-
+//constants for the program
 const decimal KwhHourCost = 0.11m;
 const decimal FreezeDryerKiloWattHour = 1.21m;
 const decimal FreezeDryerKiloWattHourCost = FreezeDryerKiloWattHour * KwhHourCost;
 
 string menuData = "menucosttime.txt";
+//reads all lines from the menuData and stores them as an array
 string[] menuCostTime = File.ReadAllLines(menuData);
 
+Console.Clear();
 Console.WriteLine("This is a program that will calculate production costs for\nfreeze drying and packaging the menu items");
 
 (string selectedItem, decimal cost, int time) = SelectMenuItem(menuCostTime);
@@ -32,13 +37,15 @@ Console.WriteLine($"Selling Cost (20% profit): ${sellingCost:F2}");
 decimal profit = myProfit(sellingCost, totalCost);
 Console.WriteLine($"Profit: ${profit:F2}");
 
+//variable to store the user choice
 string saveChoice;
+//loop to handle the users input to save or not save the order.
 while(true)
 
 {
     //Console.Clear();
     Console.Write("\nSave order? Y/N:");
-    saveChoice = Console.ReadLine()?.ToLower();
+    saveChoice = Console.ReadLine().ToLower();
 
     if (saveChoice == "y")
     {
@@ -62,21 +69,24 @@ while(true)
 
 }
 
-
+//This method allows user to select menu item and returns the menu item alone with cost and time with a tuple
 static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
 {
     while(true)
     {
         Console.WriteLine("\nMenu:");
+        //for loop goes over each item in the menu
         for (int i = 0; i < menuCostTime.Length; i++)
         {
             string[] parts = menuCostTime[i].Split(',');
             string menuName = parts[0].Trim();
+            //prints the menu by adding one for each loop until it reached the end
             Console.WriteLine($"{i + 1}. {menuName}");
         }
     
         Console.Write("\nSelect an item by number: ");
-    
+
+        //if choice is valid, return tuple. 
         if(int.TryParse(Console.ReadLine(),out int choice) && choice >= 1 && choice <= menuCostTime.Length)
         {
 
@@ -92,9 +102,10 @@ static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
 }
 }
 
+//This method allows user to select packaging and returns packaging type and cost
 static (string,decimal) Packaging()
 {
-while(true)
+while(true) //while loop to ensure valid packaging selection
 {
     Console.Clear();
     Console.WriteLine("Select Packaging");
@@ -105,7 +116,7 @@ while(true)
     Console.Write("select an item by number: ");
     string? choice = Console.ReadLine();
 
-    switch (choice)
+    switch (choice) //checks user input againsts the choices and returns packaging type and cost
     {
         case "1": return ("Mylar Medium",1.50m);
         case "2": return ("Mylar Large",2.15m);
@@ -116,6 +127,7 @@ while(true)
 }
 }
 
+//This method calculates the total energy cost for running the freeze dryer
 static decimal electricityCost(decimal FreezeDryerKiloWattHourCost, int hours)
 {
    
@@ -129,15 +141,20 @@ static void SaveOrder(string item, string packaging, decimal packagingCost, deci
     string order = $"{item}, {packaging}, Packaging Cost: ${packagingCost:F2}, Energy Cost: ${energyCost:F2}, Total Cost: ${totalCost:F2}, Selling Cost: ${sellingCost:F2}, Profit: {profit:F2}";
     string purchaseHistory = "purchasehistory.txt";
 
-    List<string> orders = new();
+    List<string> orders = new(); //list to store orders
     if(File.Exists(purchaseHistory))
     {
+        //Reads and adds existing orders to the list
         orders.AddRange(File.ReadAllLines(purchaseHistory));
     }
     orders.Add(order);
+    //adds new order to list
     
     File.WriteAllLines(purchaseHistory, orders);
+    //writes all orders back to the file
+
     string[] savedOrders = File.ReadAllLines(purchaseHistory);
+    //reads back the same order to verify
     Console.WriteLine($"Order saved to {purchaseHistory}");
 
     Debug.Assert(savedOrders.Contains(order), "ERROR: order not saved correctly");
