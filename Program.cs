@@ -32,7 +32,6 @@ Console.WriteLine($"Selling Cost (20% profit): ${sellingCost:F2}");
 decimal profit = myProfit(sellingCost, totalCost);
 Console.WriteLine($"Profit: ${profit:F2}");
 
-
 string saveChoice;
 while(true)
 
@@ -40,6 +39,7 @@ while(true)
     //Console.Clear();
     Console.Write("\nSave order? Y/N:");
     saveChoice = Console.ReadLine()?.ToLower();
+
     if (saveChoice == "y")
     {
         SaveOrder(selectedItem, packagingType, packagingCost, totalEnergyCost, totalCost, sellingCost, profit);
@@ -58,8 +58,6 @@ while(true)
         Console.WriteLine($"Total Cost: ${totalCost:F2}");
         Console.WriteLine($"Selling Cost (20% profit): ${sellingCost:F2}");
         Console.WriteLine($"Profit: ${profit:F2}");
-        
-        continue;
     }
 
 }
@@ -69,28 +67,28 @@ static (string, decimal, int) SelectMenuItem(string[] menuCostTime)
 {
     while(true)
     {
-    Console.WriteLine("\nMenu:");
-    for (int i = 0; i < menuCostTime.Length; i++)
-    {
-        string[] parts = menuCostTime[i].Split(',');
-        string menuName = parts[0].Trim();
-        Console.WriteLine($"{i + 1}. {menuName}");
-    }
+        Console.WriteLine("\nMenu:");
+        for (int i = 0; i < menuCostTime.Length; i++)
+        {
+            string[] parts = menuCostTime[i].Split(',');
+            string menuName = parts[0].Trim();
+            Console.WriteLine($"{i + 1}. {menuName}");
+        }
     
-    Console.Write("\nSelect an item by number: ");
-    //int choice = int.Parse(Console.ReadLine() ?? "0");
-    if(int.TryParse(Console.ReadLine(),out int choice) && choice >= 1 && choice <= menuCostTime.Length)
-    {
+        Console.Write("\nSelect an item by number: ");
+    
+        if(int.TryParse(Console.ReadLine(),out int choice) && choice >= 1 && choice <= menuCostTime.Length)
+        {
 
-    string[] selectedItemParts = menuCostTime[choice - 1].Split(',');
-    string itemName = selectedItemParts[0].Trim();
-    int time = int.Parse(selectedItemParts[2].Trim());
-    decimal cost = decimal.Parse(selectedItemParts[1].Trim());
+            string[] selectedItemParts = menuCostTime[choice - 1].Split(',');
+            string itemName = selectedItemParts[0].Trim();
+            int time = int.Parse(selectedItemParts[2].Trim());
+            decimal cost = decimal.Parse(selectedItemParts[1].Trim());
 
-    Debug.Assert(choice >= 1 && choice <= menuCostTime.Length, "ERROR WITH: invaid selection");
-    return(itemName,cost, time);
-    }
-  
+            Debug.Assert(choice >= 1 && choice <= menuCostTime.Length, "ERROR WITH: invaid selection");
+            return(itemName,cost, time);
+        }
+  Console.Clear();
 }
 }
 
